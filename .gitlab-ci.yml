@@ -1,9 +1,6 @@
 image: php:7.4-cli
 before_script:
   - apt-get update && apt-get install -y git zip unzip
-cache:
-  paths:
-    - vendor/
 stages:
   - test
 .job_template: &build_template
