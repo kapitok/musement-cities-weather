@@ -14,10 +14,13 @@ use Mlozynskyy\MusementWeather\Domain\ValueObject\Coordinates;
 class City
 {
 
+    /** @var int */
     private int $cityId;
 
+    /** @var string */
     private string $name;
 
+    /** @var Coordinates */
     private Coordinates $coordinates;
 
     /**
@@ -34,6 +37,9 @@ class City
         $this->coordinates = $coordinates;
     }
 
+    /**
+     * @return int
+     */
     public function getCityId(): int
     {
         return $this->cityId;

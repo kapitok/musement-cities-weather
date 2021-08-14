@@ -4,6 +4,11 @@ declare(strict_types=1);
 
 namespace Mlozynskyy\MusementWeather\Infrastructure\Rest\MusementApi\Response;
 
+/**
+ * Class CityResponse
+ *
+ * @package Mlozynskyy\MusementWeather\Infrastructure\Rest\MusementApi\Response
+ */
 class CityResponse
 {
 
@@ -21,6 +26,11 @@ class CityResponse
 
     /**
      * CityResponse constructor.
+     *
+     * @param int $cityId
+     * @param string $name
+     * @param float $latitude
+     * @param float $longitude
      */
     public function __construct(int $cityId, string $name, float $latitude, float $longitude)
     {
@@ -30,6 +40,9 @@ class CityResponse
         $this->longitude = $longitude;
     }
 
+    /**
+     * @return int
+     */
     public function getCityId(): int
     {
         return $this->cityId;

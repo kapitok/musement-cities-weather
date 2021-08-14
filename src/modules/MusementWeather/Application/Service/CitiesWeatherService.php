@@ -26,6 +26,9 @@ class CitiesWeatherService
 
     /**
      * CitiesWeatherService constructor.
+     *
+     * @param CitiesRepositoryInterface $citiesRepository
+     * @param WeatherRepositoryInterface $weatherRepository
      */
     public function __construct(
         CitiesRepositoryInterface $citiesRepository,

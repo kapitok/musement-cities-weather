@@ -4,13 +4,16 @@ declare(strict_types=1);
 
 namespace Mlozynskyy\MusementWeather\Domain;
 
-use DateTime;
+use Mlozynskyy\MusementWeather\Domain\Exception\DateHasAlreadyPassed;
 use Mlozynskyy\MusementWeather\Domain\ValueObject\Coordinates;
+use Mlozynskyy\MusementWeather\Domain\ValueObject\Date;
+use Mlozynskyy\MusementWeather\Domain\ValueObject\WeatherCondition;
 
 /**
  * Class Weather
  *
  * @package Mlozynskyy\MusementWeather\Domain
+ * @SuppressWarnings("static")
  */
 class Weather
 {
@@ -20,7 +23,7 @@ class Weather
      */
     private Coordinates $coordinates;
 
-    /** @var array<string, string> */
+    /** @var array<string, WeatherCondition> */
     private array $forecast = [];
 
     /**
@@ -34,38 +37,47 @@ class Weather
     }
 
     /**
-     * @param DateTime $date
-     * @param string $weatherCondition
+     * @param Date $date
+     * @param WeatherCondition $weatherCondition
      */
-    public function addDay(DateTime $date, string $weatherCondition): void
+    public function addDay(Date $date, WeatherCondition $weatherCondition): void
     {
-        $this->forecast[$date->format('Y-m-d')] = $weatherCondition;
+        $this->assertThatDateHasPassed($date);
+
+        $this->forecast[$date->toString()] = $weatherCondition;
     }
 
     /**
-     * @param DateTime $dateTime
-     * @param string $default
-     * @return string
+     * @param Date $date
+     * @return WeatherCondition
      */
-    public function getConditionByDateTime(DateTime $dateTime, string $default = ''): string
+    public function getConditionByDateTime(Date $date): WeatherCondition
     {
-        return $this->forecast[$dateTime->format('Y-m-d')] ?? $default;
+        return $this->forecast[$date->toString()] ?? WeatherCondition::empty();
     }
 
     /**
-     * @return string
+     * @return WeatherCondition
      */
-    public function getTodayCondition(): string
+    public function getTodayCondition(): WeatherCondition
     {
-        return $this->getConditionByDateTime(new DateTime(), 'No forecast for today');
+        $condition = $this->getConditionByDateTime(Date::today());
+
+        return $condition->isEmpty()
+            ? WeatherCondition::fromString('No forecast for today')
+            : $condition;
     }
 
     /**
-     * @return string
+     * @return WeatherCondition
      */
-    public function getTomorrowCondition(): string
+    public function getTomorrowCondition(): WeatherCondition
     {
-        return $this->getConditionByDateTime(new DateTime('tomorrow'), 'No forecast for tomorrow');
+        $condition = $this->getConditionByDateTime(Date::tomorrow());
+
+        return $condition->isEmpty()
+            ? WeatherCondition::fromString('No forecast for tomorrow')
+            : $condition;
     }
 
     /**
@@ -74,6 +86,16 @@ class Weather
     public function getCoordinates(): Coordinates
     {
         return $this->coordinates;
+    }
+
+    /**
+     * @param Date $date
+     */
+    private function assertThatDateHasPassed(Date $date): void
+    {
+        if ($date->hasPassed()) {
+            DateHasAlreadyPassed::with($date);
+        }
     }
 
 }

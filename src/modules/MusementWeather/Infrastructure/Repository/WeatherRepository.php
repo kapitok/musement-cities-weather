@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace Mlozynskyy\MusementWeather\Infrastructure\Repository;
 
-use DateTime;
 use Mlozynskyy\MusementWeather\Application\Repository\WeatherRepositoryInterface;
 use Mlozynskyy\MusementWeather\Domain\ValueObject\Coordinates;
+use Mlozynskyy\MusementWeather\Domain\ValueObject\Date;
+use Mlozynskyy\MusementWeather\Domain\ValueObject\WeatherCondition;
 use Mlozynskyy\MusementWeather\Domain\Weather;
 use Mlozynskyy\MusementWeather\Infrastructure\Rest\RestClientInterface;
 
@@ -14,6 +15,7 @@ use Mlozynskyy\MusementWeather\Infrastructure\Rest\RestClientInterface;
  * Class WeatherRepository
  *
  * @package Mlozynskyy\MusementWeather\Infrastructure\Repository
+ * @SuppressWarnings("static")
  */
 class WeatherRepository implements WeatherRepositoryInterface
 {
@@ -51,8 +53,8 @@ class WeatherRepository implements WeatherRepositoryInterface
 
         foreach ($weatherForecastData->getForecast() as $weatherConditionData) {
             $weather->addDay(
-                new DateTime($weatherConditionData['date']),
-                $weatherConditionData['condition']
+                Date::fromString($weatherConditionData['date']),
+                WeatherCondition::fromString($weatherConditionData['condition'])
             );
         }
 
