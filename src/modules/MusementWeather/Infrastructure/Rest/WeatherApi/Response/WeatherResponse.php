@@ -42,17 +42,11 @@ class WeatherResponse
         $this->forecastData = $forecastData;
     }
 
-    /**
-     * @return float
-     */
     public function getLatitude(): float
     {
         return $this->latitude;
     }
 
-    /**
-     * @return float
-     */
     public function getLongitude(): float
     {
         return $this->longitude;

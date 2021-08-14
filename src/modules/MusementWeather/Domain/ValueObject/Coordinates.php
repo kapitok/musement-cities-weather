@@ -20,9 +20,6 @@ class Coordinates
 
     /**
      * Coordinates constructor.
-     *
-     * @param float $latitude
-     * @param float $longitude
      */
     public function __construct(float $latitude, float $longitude)
     {
@@ -30,26 +27,16 @@ class Coordinates
         $this->longitude = $longitude;
     }
 
-    /**
-     * @return float
-     */
     public function getLatitude(): float
     {
         return $this->latitude;
     }
 
-    /**
-     * @return float
-     */
     public function getLongitude(): float
     {
         return $this->longitude;
     }
 
-    /**
-     * @param Coordinates $coordinates
-     * @return bool
-     */
     public function isEqual(Coordinates $coordinates): bool
     {
         return $this->latitude === $coordinates->getLatitude()

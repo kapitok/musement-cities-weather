@@ -45,17 +45,11 @@ class City
         return $this->cityId;
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @return Coordinates
-     */
     public function getCoordinates(): Coordinates
     {
         return $this->coordinates;
