@@ -15,7 +15,7 @@ class CityWeatherTest extends TestCase
     public function testReadModelIsWorkingProperly(): void
     {
         $cityMock = $this->createConfiguredMock(City::class, [
-            'getName' => 'City Name',,
+            'getName' => 'City Name',
         ]);
         $weatherMock = $this->createConfiguredMock(Weather::class, [
             'getTodayCondition' => 'Heavy rain',
