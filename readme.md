@@ -1,6 +1,8 @@
 # Musement Weather App
 
-Console application which allows printing of weather information for each city available in Musement's catalogue.
+Application which allows printing of weather information for each city available in Musement's catalogue.
+
+![Alt text](docs/img/musement-weather-img.png?raw=true "App image")
 
 ## Installation
 
