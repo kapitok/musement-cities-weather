@@ -5,18 +5,15 @@ cache:
   paths:
     - vendor/
 stages:
-  - build
   - test
-build:
-  stage: build
-  script:
+.job_template: &build_template
+  before_script:
     - curl -sS https://getcomposer.org/installer | php
     - php composer.phar install
     - php composer.phar dumpautoload
 test:unit:
+  <<: *build_template
   stage: test
-  variables:
-    COMPOSER_ARGS: "--prefer-dist --ignore-platform-reqs --quiet --no-interaction --no-progress"
   script:
     - cd $CI_PROJECT_DIR
-    - php composer.phar test
+    - php composer.phar phpunit
