@@ -1,11 +1,11 @@
 # Musement Weather App
 
-It is a console application which allows printing of weather information for each city available in Musement's catalogue
+Console application which allows printing of weather information for each city available in Musement's catalogue.
 
 ## Installation
 
 ####Step 1
-Put your .env file with content in project root directory:
+Create and put .env file in the project root. Weatherapi.com has a free plan. Create your own account to get a key (API_WEATHER_KEY).
 
 ```
 API_WEATHER_URI="http://api.weatherapi.com"
@@ -14,7 +14,7 @@ API_MUSEMENT_URI="https://api.musement.com"
 ```
 
 ####Step 2
-Run DockerCompose from the root folder
+Run DockerCompose from the root folder:
 
 ```
 docker-compose -f docker-compose.yml up
