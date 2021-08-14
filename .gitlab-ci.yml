@@ -17,3 +17,9 @@ test:unit:
   script:
     - cd $CI_PROJECT_DIR
     - php composer.phar phpunit
+test:static_analyze:
+  <<: *build_template
+  stage: test
+  script:
+    - cd $CI_PROJECT_DIR
+    - php composer.phar static_analyze
