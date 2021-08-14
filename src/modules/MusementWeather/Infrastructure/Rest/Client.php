@@ -46,6 +46,7 @@ class Client implements RestClientInterface
 
     /**
      * @return CityResponse[]
+     * @throws ApiException
      */
     public function getCities(): array
     {

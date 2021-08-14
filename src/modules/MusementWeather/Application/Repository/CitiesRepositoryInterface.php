@@ -14,7 +14,9 @@ use Mlozynskyy\MusementWeather\Domain\City;
 interface CitiesRepositoryInterface
 {
 
-    /** @return array<City> */
+    /**
+     * @return array<City>
+     */
     public function getList(): array;
 
 }

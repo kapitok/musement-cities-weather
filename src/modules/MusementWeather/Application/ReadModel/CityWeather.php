@@ -15,12 +15,17 @@ use Mlozynskyy\MusementWeather\Domain\Weather;
 class CityWeather
 {
 
+    /** @var City */
     private City $city;
 
+    /** @var Weather */
     private Weather $weather;
 
     /**
      * CityWeather constructor.
+     *
+     * @param City $city
+     * @param Weather $weather
      */
     public function __construct(City $city, Weather $weather)
     {
@@ -28,16 +33,25 @@ class CityWeather
         $this->weather = $weather;
     }
 
+    /**
+     * @return string
+     */
     public function getCityName(): string
     {
         return $this->city->getName();
     }
 
+    /**
+     * @return string
+     */
     public function getTodayCondition(): string
     {
         return $this->weather->getTodayCondition();
     }
 
+    /**
+     * @return string
+     */
     public function getTomorrowCondition(): string
     {
         return $this->weather->getTomorrowCondition();
