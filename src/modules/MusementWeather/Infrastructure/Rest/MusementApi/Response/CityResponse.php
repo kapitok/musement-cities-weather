@@ -8,7 +8,7 @@ class CityResponse
 {
 
     /** @var int */
-    private int $id;
+    private int $cityId;
 
     /** @var string */
     private string $name;
@@ -22,17 +22,17 @@ class CityResponse
     /**
      * CityResponse constructor.
      */
-    public function __construct(int $id, string $name, float $latitude, float $longitude)
+    public function __construct(int $cityId, string $name, float $latitude, float $longitude)
     {
-        $this->id = $id;
+        $this->cityId = $cityId;
         $this->name = $name;
         $this->latitude = $latitude;
         $this->longitude = $longitude;
     }
 
-    public function getId(): int
+    public function getCityId(): int
     {
-        return $this->id;
+        return $this->cityId;
     }
 
     public function getName(): string

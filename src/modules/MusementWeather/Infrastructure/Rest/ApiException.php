@@ -14,7 +14,7 @@ use Exception;
 class ApiException extends Exception
 {
 
-    /** @return static */
+    /** @return ApiException */
     public static function with(string $uri): self
     {
         return new self(sprintf('[Api problem] uri: %s', $uri));

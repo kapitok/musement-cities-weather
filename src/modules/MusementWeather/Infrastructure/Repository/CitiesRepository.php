@@ -42,7 +42,7 @@ class CitiesRepository implements CitiesRepositoryInterface
 
         return array_map(static function (CityResponse $city) {
             return new City(
-                $city->getId(),
+                $city->getCityId(),
                 $city->getName(),
                 new Coordinates(
                     $city->getLatitude(),

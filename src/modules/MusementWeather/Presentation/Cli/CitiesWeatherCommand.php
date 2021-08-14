@@ -41,6 +41,7 @@ class CitiesWeatherCommand extends Command
      * @param InputInterface $input
      * @param OutputInterface $output
      * @return int
+     * @SuppressWarnings("unused")
      */
     // @codingStandardsIgnoreLine
     protected function execute(InputInterface $input, OutputInterface $output): int

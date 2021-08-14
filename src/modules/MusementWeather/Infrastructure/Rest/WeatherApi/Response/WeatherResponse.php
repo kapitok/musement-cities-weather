@@ -18,7 +18,7 @@ class WeatherResponse
     /** @var float */
     private float $longitude;
 
-    /** @var array */
+    /** @var array<array> */
     private array $forecastData;
 
     /**
@@ -27,7 +27,7 @@ class WeatherResponse
      * @param string $locality
      * @param float $latitude
      * @param float $longitude
-     * @param array $forecastData
+     * @param array<array> $forecastData
      */
     public function __construct(string $locality, float $latitude, float $longitude, array $forecastData)
     {
@@ -55,7 +55,8 @@ class WeatherResponse
      * ];
      * </code>
      *
-     * @return array
+     * @return array<array>
+     * @SuppressWarnings("static")
      */
     public function getForecast(): array
     {

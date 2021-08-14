@@ -17,6 +17,7 @@ use Throwable;
  * Class Client
  *
  * @package Mlozynskyy\MusementWeather\Infrastructure\Rest
+ * @SuppressWarnings("static")
  */
 class Client implements RestClientInterface
 {
@@ -95,8 +96,8 @@ class Client implements RestClientInterface
 
     /**
      * @param string $uri
-     * @param array $options
-     * @return array
+     * @param array<array> $options
+     * @return array<array>
      * @throws ApiException
      */
     protected function get(string $uri, array $options = []): array
@@ -120,7 +121,7 @@ class Client implements RestClientInterface
 
     /**
      * @param string $response
-     * @return array
+     * @return array<array>
      */
     protected function decodeResponse(string $response): array
     {

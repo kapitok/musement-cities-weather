@@ -14,7 +14,7 @@ use Mlozynskyy\MusementWeather\Domain\ValueObject\Coordinates;
 class City
 {
 
-    private int $id;
+    private int $cityId;
 
     private string $name;
 
@@ -22,17 +22,21 @@ class City
 
     /**
      * City constructor.
+     *
+     * @param int $cityId
+     * @param string $name
+     * @param Coordinates $coordinates
      */
-    public function __construct(int $id, string $name, Coordinates $coordinates)
+    public function __construct(int $cityId, string $name, Coordinates $coordinates)
     {
-        $this->id = $id;
+        $this->cityId = $cityId;
         $this->name = $name;
         $this->coordinates = $coordinates;
     }
 
-    public function getId(): int
+    public function getCityId(): int
     {
-        return $this->id;
+        return $this->cityId;
     }
 
     public function getName(): string

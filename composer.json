@@ -26,7 +26,7 @@
     ],
     "phpmd": [
       "echo 'PHP Mess Detector'",
-      "vendor/bin/phpmd src/ text cleancode,codesize,controversial,design,naming,unusedcode"
+      "vendor/bin/phpmd src/ text cleancode,codesize,controversial,design,naming,unusedcode phpmd.xml"
     ],
     "static_analyze": [
       "@phpcs",

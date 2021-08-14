@@ -46,12 +46,18 @@ class Application
         return $this;
     }
 
+    /**
+     * @SuppressWarnings("static")
+     */
     protected function loadEnvFiles(): void
     {
         $dotenv = Dotenv::createUnsafeImmutable(__DIR__ . '/../../');
         $dotenv->load();
     }
 
+    /**
+     * @SuppressWarnings("unused")
+     */
     protected function loadContainer(): void
     {
         $container = new ContainerBuilder();

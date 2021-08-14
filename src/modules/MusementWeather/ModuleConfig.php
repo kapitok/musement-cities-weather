@@ -40,9 +40,9 @@ class ModuleConfig
 
     /**
      * @param string $name
-     * @return array|string
+     * @return string
      */
-    protected function getEnv(string $name)
+    protected function getEnv(string $name): string
     {
         $value = getenv($name);
 
