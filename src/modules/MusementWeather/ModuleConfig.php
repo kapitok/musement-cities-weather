@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Mlozynskyy\MusementWeather;
@@ -7,10 +8,12 @@ use RuntimeException;
 
 /**
  * Class ModuleConfig
+ *
  * @package Mlozynskyy\MusementWeather
  */
 class ModuleConfig
 {
+
     /**
      * @return string
      */
@@ -35,6 +38,10 @@ class ModuleConfig
         return $this->getEnv('API_WEATHER_URI');
     }
 
+    /**
+     * @param string $name
+     * @return array|string
+     */
     protected function getEnv(string $name)
     {
         $value = getenv($name);
@@ -45,4 +52,5 @@ class ModuleConfig
 
         return $value;
     }
+
 }

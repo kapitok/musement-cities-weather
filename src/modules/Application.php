@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Mlozynskyy;
@@ -12,13 +13,13 @@ use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 
 /**
  * Class Application
+ *
  * @package Mlozynskyy
  */
 class Application
 {
-    /**
-     * @var ConsoleApplication
-     */
+
+    /** @var ConsoleApplication */
     private ConsoleApplication $application;
 
     public function __construct()
@@ -58,8 +59,9 @@ class Application
         $loader->load(__DIR__ . '/../services.php');
         $container->compile();
 
+        // @codingStandardsIgnoreLine
         foreach ($container->findTaggedServiceIds('consoleCommand') as $commandServiceName => $services) {
-            /** @var  $commandInstance Command */
+            /** @var Command $commandInstance */
             $commandInstance = $container->get($commandServiceName);
 
             if (!$commandInstance instanceof Command) {
@@ -69,4 +71,5 @@ class Application
             $this->application->add($commandInstance);
         }
     }
+
 }

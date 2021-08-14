@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Mlozynskyy\MusementWeather\Infrastructure\Rest\WeatherApi\Response;
@@ -7,20 +8,22 @@ use Nette\Utils\Arrays;
 
 class WeatherResponse
 {
-    /** @var string  */
+
+    /** @var string */
     private string $locality;
 
-    /** @var float  */
+    /** @var float */
     private float $latitude;
 
-    /** @var float  */
+    /** @var float */
     private float $longitude;
 
-    /** @var array  */
+    /** @var array */
     private array $forecastData;
 
     /**
      * WeatherResponse constructor.
+     *
      * @param string $locality
      * @param float $latitude
      * @param float $longitude
@@ -34,17 +37,11 @@ class WeatherResponse
         $this->forecastData = $forecastData;
     }
 
-    /**
-     * @return float
-     */
     public function getLatitude(): float
     {
         return $this->latitude;
     }
 
-    /**
-     * @return float
-     */
     public function getLongitude(): float
     {
         return $this->longitude;
@@ -57,15 +54,17 @@ class WeatherResponse
      *   'condition' => 'Partly cloudy',
      * ];
      * </code>
+     *
      * @return array
      */
     public function getForecast(): array
     {
-        return array_map(static function($dayForecastData) {
+        return array_map(static function ($dayForecastData) {
             return [
                 'date' => $dayForecastData['date'],
                 'condition' => Arrays::get($dayForecastData, ['day', 'condition', 'text'], ''),
             ];
         }, $this->forecastData);
     }
+
 }

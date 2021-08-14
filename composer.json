@@ -14,19 +14,19 @@
     ],
     "phpstan": [
       "echo 'PHPStan'",
-      "vendor/bin/phpstan analyse src/ public/ -c phpstan.neon --level=6"
+      "vendor/bin/phpstan analyse src/ -c phpstan.neon --level=6"
     ],
     "phpcs": [
       "echo 'PHP Code Sniffer'",
-      "vendor/bin/phpcs src/ tests/ public/ --standard=phpcs.xml -s"
+      "vendor/bin/phpcs src/ tests/ --standard=phpcs.xml -s"
     ],
     "phpcbf": [
       "echo 'PHP CBF'",
-      "vendor/bin/phpcbf src/ tests/ public/ --standard=phpcs.xml -s"
+      "vendor/bin/phpcbf src/ tests/ --standard=phpcs.xml -s"
     ],
     "phpmd": [
       "echo 'PHP Mess Detector'",
-      "vendor/bin/phpmd src/ public/ text cleancode,codesize,controversial,design,naming,unusedcode"
+      "vendor/bin/phpmd src/ text cleancode,codesize,controversial,design,naming,unusedcode"
     ],
     "static_analyze": [
       "@phpcs",
@@ -35,6 +35,7 @@
     ]
   },
   "require": {
+    "php": ">=7.4.0",
     "guzzlehttp/guzzle": "^7.3",
     "symfony/console": "^5.3",
     "symfony/dependency-injection": "^5.3",
