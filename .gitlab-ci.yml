@@ -1,24 +1,26 @@
 image: php:7.4-cli
-
 cache:
   paths:
     - vendor/
-
 before_script:
-  - curl -sS https://getcomposer.org/installer | php
-  - php composer.phar install
+  - apt-get update && apt-get install -y \
+    git \
+    zip \
+    unzip
 stages:
   - build
   - test
+build:
+  stage: build
+  script:
+    - curl -sS https://getcomposer.org/installer | php
+    - php composer.phar install
+    - cd $CI_PROJECT_DIR
+    - php $PHP_ARGS composer.phar global require hirak/prestissimo --verbose
 test:unit:
   stage: test
   variables:
     COMPOSER_ARGS: "--prefer-dist --ignore-platform-reqs --quiet --no-interaction --no-progress"
   script:
-    - export $PHP_EXEC_ENV
-    - cd $CI_PROJECT_DIR
-    - php $PHP_ARGS composer.phar global config platform.php 7.3.19
-    - php $PHP_ARGS composer.phar global require hirak/prestissimo --verbose
-    - php $PHP_ARGS composer.phar install $COMPOSER_ARGS
     - cd $CI_PROJECT_DIR
     - php composer.phar test
