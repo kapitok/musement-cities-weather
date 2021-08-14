@@ -16,4 +16,5 @@ interface WeatherRepositoryInterface
 {
 
     public function getByCoordinates(Coordinates $coordinates, int $days): Weather;
+
 }

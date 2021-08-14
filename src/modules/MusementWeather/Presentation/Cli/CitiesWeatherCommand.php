@@ -10,15 +10,21 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\ConsoleOutputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use function str_repeat;
 
 class CitiesWeatherCommand extends Command
 {
 
+    /** @var string */
     protected static $defaultName = 'app:cities:list';
 
+    /** @var CitiesWeatherService */
     private CitiesWeatherService $service;
 
+    /**
+     * CitiesWeatherCommand constructor.
+     *
+     * @param CitiesWeatherService $service
+     */
     public function __construct(CitiesWeatherService $service)
     {
         $this->service = $service;
@@ -31,6 +37,13 @@ class CitiesWeatherCommand extends Command
         $this->setDescription('Cities Weather APP');
     }
 
+    /**
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     * @return int
+     * @SuppressWarnings("unused")
+     */
+    // @codingStandardsIgnoreLine
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         if (!$output instanceof ConsoleOutputInterface) {
@@ -39,16 +52,16 @@ class CitiesWeatherCommand extends Command
 
         $readModels = $this->service->getCitiesWeather();
 
-        $output->writeln(\str_repeat('=', 50));
+        $output->writeln(str_repeat('=', 50));
 
         foreach ($readModels as $readModel) {
             $output->writeln(
-                \sprintf(
+                sprintf(
                     'Processed city %s | %s - %s',
                     $readModel->getCityName(),
                     $readModel->getTodayCondition(),
-                    $readModel->getTomorrowCondition(),
-                ),
+                    $readModel->getTomorrowCondition()
+                )
             );
         }
 
@@ -56,4 +69,5 @@ class CitiesWeatherCommand extends Command
 
         return Command::SUCCESS;
     }
+
 }

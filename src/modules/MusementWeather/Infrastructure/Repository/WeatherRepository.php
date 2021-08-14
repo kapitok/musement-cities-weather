@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Mlozynskyy\MusementWeather\Infrastructure\Repository;
@@ -11,10 +12,12 @@ use Mlozynskyy\MusementWeather\Infrastructure\Rest\RestClientInterface;
 
 /**
  * Class WeatherRepository
+ *
  * @package Mlozynskyy\MusementWeather\Infrastructure\Repository
  */
 class WeatherRepository implements WeatherRepositoryInterface
 {
+
     /**
      * @var RestClientInterface
      */
@@ -22,6 +25,7 @@ class WeatherRepository implements WeatherRepositoryInterface
 
     /**
      * WeatherRepository constructor.
+     *
      * @param RestClientInterface $restClient
      */
     public function __construct(RestClientInterface $restClient)
@@ -54,4 +58,5 @@ class WeatherRepository implements WeatherRepositoryInterface
 
         return $weather;
     }
+
 }
