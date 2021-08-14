@@ -101,7 +101,7 @@ class Client implements RestClientInterface
      * @return array<array>
      * @throws ApiException
      */
-    protected function get(string $uri, array $options = []): array
+    public function get(string $uri, array $options = []): array
     {
         try {
             $response = $this->httpClient

@@ -6,6 +6,7 @@ namespace Tests\Unit\Application\ReadModel;
 
 use Mlozynskyy\MusementWeather\Application\ReadModel\CityWeather;
 use Mlozynskyy\MusementWeather\Domain\City;
+use Mlozynskyy\MusementWeather\Domain\ValueObject\WeatherCondition;
 use Mlozynskyy\MusementWeather\Domain\Weather;
 use PHPUnit\Framework\TestCase;
 
@@ -18,8 +19,12 @@ class CityWeatherTest extends TestCase
             'getName' => 'City Name',
         ]);
         $weatherMock = $this->createConfiguredMock(Weather::class, [
-            'getTodayCondition' => 'Heavy rain',
-            'getTomorrowCondition' => 'Partly cloudy',
+            'getTodayCondition' => $this->createConfiguredMock(WeatherCondition::class, [
+                'toString' => 'Heavy rain',
+            ]),
+            'getTomorrowCondition' => $this->createConfiguredMock(WeatherCondition::class, [
+                'toString' => 'Partly cloudy',
+            ]),
         ]);
 
         $readModel = new CityWeather($cityMock, $weatherMock);

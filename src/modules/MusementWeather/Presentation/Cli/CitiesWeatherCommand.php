@@ -68,7 +68,7 @@ class CitiesWeatherCommand extends Command
                 );
             }
         } catch (ApiException $exception) {
-            $output->writeln('Api problem please try again later');
+            $output->writeln('Api problem occurred, please try again later');
         } catch (Throwable $exception) {
             $output->writeln('Something went wrong');
         } finally {

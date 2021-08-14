@@ -46,7 +46,7 @@ class CityWeather
      */
     public function getTodayCondition(): string
     {
-        return $this->weather->getTodayCondition();
+        return $this->weather->getTodayCondition()->toString();
     }
 
     /**
@@ -54,7 +54,7 @@ class CityWeather
      */
     public function getTomorrowCondition(): string
     {
-        return $this->weather->getTomorrowCondition();
+        return $this->weather->getTomorrowCondition()->toString();
     }
 
 }
