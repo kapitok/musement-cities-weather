@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Mlozynskyy\MusementWeather\Application\Service;
@@ -9,22 +10,22 @@ use Mlozynskyy\MusementWeather\Application\Repository\WeatherRepositoryInterface
 
 /**
  * Class CitiesWeatherService
+ *
  * @package Mlozynskyy\MusementWeather\Application\Service
  */
 class CitiesWeatherService
 {
-    const FORECAST_FOR_DAYS = 2;
 
-    /** @var CitiesRepositoryInterface  */
+    private const FORECAST_FOR_DAYS = 2;
+
+    /** @var CitiesRepositoryInterface */
     private CitiesRepositoryInterface $citiesRepository;
 
-    /** @var WeatherRepositoryInterface  */
+    /** @var WeatherRepositoryInterface */
     private WeatherRepositoryInterface $weatherRepository;
 
     /**
      * CitiesWeatherService constructor.
-     * @param CitiesRepositoryInterface $citiesRepository
-     * @param WeatherRepositoryInterface $weatherRepository
      */
     public function __construct(
         CitiesRepositoryInterface $citiesRepository,
@@ -35,7 +36,7 @@ class CitiesWeatherService
     }
 
     /**
-     * @return CityWeather[]
+     * @return array<CityWeather>
      */
     public function getCitiesWeather(): array
     {
@@ -51,4 +52,5 @@ class CitiesWeatherService
 
         return $readModels;
     }
+
 }

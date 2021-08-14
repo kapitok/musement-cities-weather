@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Mlozynskyy\MusementWeather\Domain;
@@ -8,18 +9,18 @@ use Mlozynskyy\MusementWeather\Domain\ValueObject\Coordinates;
 
 /**
  * Class Weather
+ *
  * @package Mlozynskyy\MusementWeather\Domain
  */
 class Weather
 {
+
     /**
      * @var Coordinates
      */
     private Coordinates $coordinates;
 
-    /**
-     * @var array
-     */
+    /** @var array<string, string> */
     private array $forecast = [];
 
     /**
@@ -74,4 +75,5 @@ class Weather
     {
         return $this->coordinates;
     }
+
 }

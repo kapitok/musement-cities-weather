@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Tests\Unit\Application\ReadModel;
@@ -10,10 +11,11 @@ use PHPUnit\Framework\TestCase;
 
 class CityWeatherTest extends TestCase
 {
-    public function testReadModelIsWorkingProperly()
+
+    public function testReadModelIsWorkingProperly(): void
     {
         $cityMock = $this->createConfiguredMock(City::class, [
-            'getName' => 'City Name'
+            'getName' => 'City Name',
         ]);
         $weatherMock = $this->createConfiguredMock(Weather::class, [
             'getTodayCondition' => 'Heavy rain',
@@ -26,4 +28,5 @@ class CityWeatherTest extends TestCase
         $this->assertEquals('Heavy rain', $readModel->getTodayCondition());
         $this->assertEquals('Partly cloudy', $readModel->getTomorrowCondition());
     }
+
 }

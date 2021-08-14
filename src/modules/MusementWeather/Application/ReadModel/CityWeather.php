@@ -42,4 +42,5 @@ class CityWeather
     {
         return $this->weather->getTomorrowCondition();
     }
+
 }

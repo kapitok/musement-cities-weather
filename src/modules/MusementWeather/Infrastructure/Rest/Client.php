@@ -1,8 +1,10 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Mlozynskyy\MusementWeather\Infrastructure\Rest;
 
+use GuzzleHttp\Client as GuzzleClient;
 use Mlozynskyy\MusementWeather\Domain\ValueObject\Coordinates;
 use Mlozynskyy\MusementWeather\Infrastructure\Rest\MusementApi\Response\CityResponse;
 use Mlozynskyy\MusementWeather\Infrastructure\Rest\WeatherApi\Response\WeatherResponse;
@@ -13,14 +15,17 @@ use Throwable;
 
 /**
  * Class Client
+ *
  * @package Mlozynskyy\MusementWeather\Infrastructure\Rest
+ * @SuppressWarnings("static")
  */
 class Client implements RestClientInterface
 {
+
     /**
-     * @var \GuzzleHttp\Client
+     * @var GuzzleClient
      */
-    private \GuzzleHttp\Client $httpClient;
+    private GuzzleClient $httpClient;
 
     /**
      * @var ModuleConfig
@@ -36,7 +41,7 @@ class Client implements RestClientInterface
     {
         $this->moduleConfig = $moduleConfig;
         //TODO: Use factory for instantiating
-        $this->httpClient = new \GuzzleHttp\Client();
+        $this->httpClient = new GuzzleClient();
     }
 
     /**
@@ -63,27 +68,20 @@ class Client implements RestClientInterface
 
     /**
      * @param Coordinates $coordinates
-     * @param $days
+     * @param int $days
      * @return WeatherResponse
      * @throws ApiException
      */
-    public function getWeatherByCoordinates(Coordinates $coordinates, $days): WeatherResponse
+    public function getWeatherByCoordinates(Coordinates $coordinates, int $days): WeatherResponse
     {
-        $uri = sprintf(
-            '%s/v1/forecast.json',
-            $this->moduleConfig->getApiWeatherBaseUri()
-        );
+        $uri = sprintf('%s/v1/forecast.json', $this->moduleConfig->getApiWeatherBaseUri());
 
         $options = [
             'query' => [
                 'key' => $this->moduleConfig->getApiWeatherKey(),
-                'q' => sprintf(
-                    '%d,%d',
-                    $coordinates->getLatitude(),
-                    $coordinates->getLongitude()
-                ),
-                'days' => $days
-            ]
+                'q' => sprintf('%d,%d', $coordinates->getLatitude(), $coordinates->getLongitude()),
+                'days' => $days,
+            ],
         ];
 
         $response = $this->get($uri, $options);
@@ -98,8 +96,8 @@ class Client implements RestClientInterface
 
     /**
      * @param string $uri
-     * @param array $options
-     * @return array
+     * @param array<array> $options
+     * @return array<array>
      * @throws ApiException
      */
     protected function get(string $uri, array $options = []): array
@@ -123,7 +121,7 @@ class Client implements RestClientInterface
 
     /**
      * @param string $response
-     * @return array
+     * @return array<array>
      */
     protected function decodeResponse(string $response): array
     {
@@ -142,6 +140,7 @@ class Client implements RestClientInterface
      */
     protected function isSuccess(int $statusCode): bool
     {
-        return (200 <= $statusCode && 300 > $statusCode);
+        return 200 <= $statusCode && 300 > $statusCode;
     }
+
 }

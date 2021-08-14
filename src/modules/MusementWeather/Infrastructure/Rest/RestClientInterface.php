@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Mlozynskyy\MusementWeather\Infrastructure\Rest;
 
 use Mlozynskyy\MusementWeather\Domain\ValueObject\Coordinates;
+use Mlozynskyy\MusementWeather\Infrastructure\Rest\MusementApi\Response\CityResponse;
 use Mlozynskyy\MusementWeather\Infrastructure\Rest\WeatherApi\Response\WeatherResponse;
 
 /**
@@ -15,9 +16,14 @@ use Mlozynskyy\MusementWeather\Infrastructure\Rest\WeatherApi\Response\WeatherRe
 interface RestClientInterface
 {
 
-    /** @return array<\Mlozynskyy\MusementWeather\Infrastructure\Rest\MusementApi\Response\CityResponse> */
+    /** @return array<CityResponse> */
     public function getCities(): array;
 
-    public function getWeatherByCoordinates(Coordinates $coordinates, $days): WeatherResponse;
+    /**
+     * @param Coordinates $coordinates
+     * @param int $days
+     * @return WeatherResponse
+     */
+    public function getWeatherByCoordinates(Coordinates $coordinates, int $days): WeatherResponse;
 
 }

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Mlozynskyy\MusementWeather\Infrastructure\Repository;
@@ -11,10 +12,12 @@ use Mlozynskyy\MusementWeather\Infrastructure\Rest\RestClientInterface;
 
 /**
  * Class CitiesRepository
+ *
  * @package Mlozynskyy\MusementWeather\Infrastructure\Repository
  */
 class CitiesRepository implements CitiesRepositoryInterface
 {
+
     /**
      * @var RestClientInterface
      */
@@ -22,6 +25,7 @@ class CitiesRepository implements CitiesRepositoryInterface
 
     /**
      * CitiesRepository constructor.
+     *
      * @param RestClientInterface $restClient
      */
     public function __construct(RestClientInterface $restClient)
@@ -36,9 +40,9 @@ class CitiesRepository implements CitiesRepositoryInterface
     {
         $cities = $this->restClient->getCities();
 
-        return array_map(function (CityResponse $city) {
+        return array_map(static function (CityResponse $city) {
             return new City(
-                $city->getId(),
+                $city->getCityId(),
                 $city->getName(),
                 new Coordinates(
                     $city->getLatitude(),
@@ -47,4 +51,5 @@ class CitiesRepository implements CitiesRepositoryInterface
             );
         }, $cities);
     }
+
 }
