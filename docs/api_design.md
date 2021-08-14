@@ -8,7 +8,7 @@
 ----
 
 ###Set the forecast for a specific city
-
+Resource allows saving weather forecast for a specific city. In case forecast for date already exist it will be replaced by last one.
 * **URL**
 
   /api/v3/cities/{id}/forecast
@@ -83,7 +83,8 @@
   ]
   ```
 
-####Get the forecast for a specific city
+####Get the weather forecast for a specific city
+Endpoint allows getting information about the weather forecast for a specific city. There is a filter available which helps to get the information for concrete day. In case FROM is not defined all available data from today will be returned. In case TO is not defined all available data from specific date (FROM) will be returned. To get  just today's weather forecast you should put today's date in both params (FROM, TO).
 
 * **URL**
 
