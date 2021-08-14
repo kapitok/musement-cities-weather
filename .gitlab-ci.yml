@@ -1,11 +1,12 @@
 image: php:7.4-cli
 
+cache:
+  paths:
+    - vendor/
+
 before_script:
-  - ls -la
-  - php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
-    && php composer-setup.php \
-    && mv composer.phar /usr/local/bin/composer \
-    && chmod +x /usr/local/bin/composer
+  - curl -sS https://getcomposer.org/installer | php
+  - php composer.phar install
 stages:
   - build
   - test
