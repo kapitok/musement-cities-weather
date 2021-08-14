@@ -1,0 +1,10 @@
+version: '3.5'
+services:
+  php:
+    container_name: container_musement_weather_php_1
+    tty: true
+    build:
+      context: .
+      dockerfile: docker/php-cli/Dockerfile
+    volumes:
+      - .:/usr/src/musement-weather:cached
