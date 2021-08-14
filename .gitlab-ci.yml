@@ -1,9 +1,9 @@
 image: php:7.4-cli
+before_script:
+  - apt-get update && apt-get install -y git zip unzip
 cache:
   paths:
     - vendor/
-before_script:
-  - apt-get update && apt-get install -y git zip unzip
 stages:
   - build
   - test
@@ -12,8 +12,6 @@ build:
   script:
     - curl -sS https://getcomposer.org/installer | php
     - php composer.phar install
-    - cd $CI_PROJECT_DIR
-    - php $PHP_ARGS composer.phar global require hirak/prestissimo --verbose
 test:unit:
   stage: test
   variables:
