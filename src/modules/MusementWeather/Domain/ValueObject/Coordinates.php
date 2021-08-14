@@ -4,11 +4,18 @@ declare(strict_types=1);
 
 namespace Mlozynskyy\MusementWeather\Domain\ValueObject;
 
+/**
+ * Class Coordinates
+ *
+ * @package Mlozynskyy\MusementWeather\Domain\ValueObject
+ */
 class Coordinates
 {
 
+    /** @var float */
     private float $latitude;
 
+    /** @var float */
     private float $longitude;
 
     /**

@@ -16,7 +16,9 @@ use Mlozynskyy\MusementWeather\Infrastructure\Rest\WeatherApi\Response\WeatherRe
 interface RestClientInterface
 {
 
-    /** @return array<CityResponse> */
+    /**
+     * @return array<CityResponse>
+     */
     public function getCities(): array;
 
     /**

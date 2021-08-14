@@ -15,6 +15,11 @@ use Mlozynskyy\MusementWeather\Domain\Weather;
 interface WeatherRepositoryInterface
 {
 
+    /**
+     * @param Coordinates $coordinates
+     * @param int $days
+     * @return Weather
+     */
     public function getByCoordinates(Coordinates $coordinates, int $days): Weather;
 
 }

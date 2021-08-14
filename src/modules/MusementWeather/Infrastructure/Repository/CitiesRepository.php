@@ -34,7 +34,7 @@ class CitiesRepository implements CitiesRepositoryInterface
     }
 
     /**
-     * @return City[]
+     * @return array<City>
      */
     public function getList(): array
     {

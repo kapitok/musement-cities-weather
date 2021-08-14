@@ -6,6 +6,11 @@ namespace Mlozynskyy\MusementWeather\Infrastructure\Rest\WeatherApi\Response;
 
 use Nette\Utils\Arrays;
 
+/**
+ * Class WeatherResponse
+ *
+ * @package Mlozynskyy\MusementWeather\Infrastructure\Rest\WeatherApi\Response
+ */
 class WeatherResponse
 {
 
