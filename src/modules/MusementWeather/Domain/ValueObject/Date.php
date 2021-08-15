@@ -5,11 +5,13 @@ declare(strict_types=1);
 namespace Mlozynskyy\MusementWeather\Domain\ValueObject;
 
 use DateTime;
+use Mlozynskyy\MusementWeather\Domain\Common\DateProvider;
 
 /**
  * Class Date
  *
  * @package Mlozynskyy\MusementWeather\Domain\ValueObject
+ * @SuppressWarnings("static")
  */
 class Date
 {
@@ -43,7 +45,7 @@ class Date
      */
     public static function today(): Date
     {
-        return new self(new DateTime());
+        return new self(DateProvider::now());
     }
 
     /**
@@ -51,7 +53,7 @@ class Date
      */
     public static function tomorrow(): Date
     {
-        return new self(new DateTime('tomorrow'));
+        return new self(DateProvider::tomorrow());
     }
 
     /**
@@ -76,7 +78,7 @@ class Date
      */
     public function hasPassed(): bool
     {
-        return $this->dateTime <= new DateTime('-1 day');
+        return $this->dateTime <= DateProvider::yesterday();
     }
 
 }
