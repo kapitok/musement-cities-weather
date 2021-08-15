@@ -70,7 +70,7 @@ class CitiesWeatherCommand extends Command
         } catch (ApiException $exception) {
             $output->writeln('Api problem occurred, please try again later');
         } catch (Throwable $exception) {
-            $output->writeln('Something went wrong');
+            $output->writeln('Something went wrong' . $exception->getMessage());
         } finally {
             $output->writeln(str_repeat('=', 50));
         }

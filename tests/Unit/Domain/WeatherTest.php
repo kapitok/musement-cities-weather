@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Domain;
 
+use Mlozynskyy\MusementWeather\Domain\Exception\DateHasAlreadyPassed;
 use Mlozynskyy\MusementWeather\Domain\ValueObject\Coordinates;
 use Mlozynskyy\MusementWeather\Domain\ValueObject\Date;
 use Mlozynskyy\MusementWeather\Domain\ValueObject\WeatherCondition;
@@ -36,23 +37,34 @@ class WeatherTest extends TestCase
     {
         //TODO: Freeze date by ValueObject for testing
         $this->weatherObject->addDay(
-            Date::fromString('2020-09-20'),
+            Date::fromString('2021-09-20'),
             WeatherCondition::fromString('Partly cloudy')
         );
         $this->weatherObject->addDay(
-            Date::fromString('2020-09-21'),
+            Date::fromString('2021-09-21'),
             WeatherCondition::fromString('Patchy rain possible')
         );
 
-        $result1 = $this->weatherObject->getConditionByDateTime(Date::fromString('2020-09-20'));
-        $result2 = $this->weatherObject->getConditionByDateTime(Date::fromString('2020-09-21'));
-        $nonexistentForecast = $this->weatherObject->getConditionByDateTime(Date::fromString('2019-09-21'));
+        $result1 = $this->weatherObject->getConditionByDate(Date::fromString('2021-09-20'));
+        $result2 = $this->weatherObject->getConditionByDate(Date::fromString('2021-09-21'));
+        $nonexistentForecast = $this->weatherObject->getConditionByDate(Date::fromString('2021-09-22'));
 
         $this->assertInstanceOf(WeatherCondition::class, $result1);
         $this->assertInstanceOf(WeatherCondition::class, $result2);
         $this->assertEquals('Partly cloudy', $result1->toString());
         $this->assertEquals('Patchy rain possible', $result2->toString());
         $this->assertTrue(WeatherCondition::empty()->isEqual($nonexistentForecast));
+    }
+
+    public function testAddingDayForecastIsWorkingProperlyWithInvalidData(): void
+    {
+        $this->expectException(DateHasAlreadyPassed::class);
+
+        //TODO: Freeze date by ValueObject for testing
+        $this->weatherObject->addDay(
+            Date::fromString('2019-09-20'),
+            WeatherCondition::fromString('Partly cloudy')
+        );
     }
 
 }

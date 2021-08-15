@@ -51,7 +51,7 @@ class Weather
      * @param Date $date
      * @return WeatherCondition
      */
-    public function getConditionByDateTime(Date $date): WeatherCondition
+    public function getConditionByDate(Date $date): WeatherCondition
     {
         return $this->forecast[$date->toString()] ?? WeatherCondition::empty();
     }
@@ -61,7 +61,7 @@ class Weather
      */
     public function getTodayCondition(): WeatherCondition
     {
-        $condition = $this->getConditionByDateTime(Date::today());
+        $condition = $this->getConditionByDate(Date::today());
 
         return $condition->isEmpty()
             ? WeatherCondition::fromString('No forecast for today')
@@ -73,7 +73,7 @@ class Weather
      */
     public function getTomorrowCondition(): WeatherCondition
     {
-        $condition = $this->getConditionByDateTime(Date::tomorrow());
+        $condition = $this->getConditionByDate(Date::tomorrow());
 
         return $condition->isEmpty()
             ? WeatherCondition::fromString('No forecast for tomorrow')
@@ -90,11 +90,12 @@ class Weather
 
     /**
      * @param Date $date
+     * @throws DateHasAlreadyPassed
      */
     private function assertThatDateHasPassed(Date $date): void
     {
         if ($date->hasPassed()) {
-            DateHasAlreadyPassed::with($date);
+            throw DateHasAlreadyPassed::with($date);
         }
     }
 

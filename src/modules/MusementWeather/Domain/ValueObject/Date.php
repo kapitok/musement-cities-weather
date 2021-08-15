@@ -76,7 +76,7 @@ class Date
      */
     public function hasPassed(): bool
     {
-        return $this->dateTime > new DateTime();
+        return $this->dateTime <= new DateTime('-1 day');
     }
 
 }
