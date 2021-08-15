@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Domain;
 
+use DateTime;
+use Mlozynskyy\MusementWeather\Domain\Common\DateProvider;
 use Mlozynskyy\MusementWeather\Domain\Exception\DateHasAlreadyPassed;
 use Mlozynskyy\MusementWeather\Domain\ValueObject\Coordinates;
 use Mlozynskyy\MusementWeather\Domain\ValueObject\Date;
@@ -21,9 +23,16 @@ class WeatherTest extends TestCase
 
     public function setUp(): void
     {
+        DateProvider::freeze(new DateTime('2020-09-20'));
+
         $this->weatherObject = new Weather(
             new Coordinates(52.37, 4.9)
         );
+    }
+
+    public function tearDown(): void
+    {
+        DateProvider::release();
     }
 
     public function testGettingCoordinatesIsWorkingProperly(): void
@@ -35,19 +44,18 @@ class WeatherTest extends TestCase
 
     public function testGettingForecastIsWorkingProperly(): void
     {
-        //TODO: Freeze date by ValueObject for testing
         $this->weatherObject->addDay(
-            Date::fromString('2021-09-20'),
+            Date::fromString('2020-09-20'),
             WeatherCondition::fromString('Partly cloudy')
         );
         $this->weatherObject->addDay(
-            Date::fromString('2021-09-21'),
+            Date::fromString('2020-09-21'),
             WeatherCondition::fromString('Patchy rain possible')
         );
 
-        $result1 = $this->weatherObject->getConditionByDate(Date::fromString('2021-09-20'));
-        $result2 = $this->weatherObject->getConditionByDate(Date::fromString('2021-09-21'));
-        $nonexistentForecast = $this->weatherObject->getConditionByDate(Date::fromString('2021-09-22'));
+        $result1 = $this->weatherObject->getConditionByDate(Date::fromString('2020-09-20'));
+        $result2 = $this->weatherObject->getConditionByDate(Date::fromString('2020-09-21'));
+        $nonexistentForecast = $this->weatherObject->getConditionByDate(Date::fromString('2020-09-22'));
 
         $this->assertInstanceOf(WeatherCondition::class, $result1);
         $this->assertInstanceOf(WeatherCondition::class, $result2);
@@ -60,9 +68,8 @@ class WeatherTest extends TestCase
     {
         $this->expectException(DateHasAlreadyPassed::class);
 
-        //TODO: Freeze date by ValueObject for testing
         $this->weatherObject->addDay(
-            Date::fromString('2019-09-20'),
+            Date::fromString('2020-09-19'),
             WeatherCondition::fromString('Partly cloudy')
         );
     }
