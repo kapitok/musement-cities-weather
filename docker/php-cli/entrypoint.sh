@@ -5,4 +5,3 @@ php composer.phar install
 php composer.phar dumpautoload
 
 php -a
-

@@ -2,4 +2,5 @@ vendor/
 .env
 .phpunit.result.cache
 .idea/
+.idea
 composer.phar
