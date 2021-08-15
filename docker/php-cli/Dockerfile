@@ -1,7 +1,8 @@
 FROM php:7.4-cli
 
-COPY ./ /usr/src/musement-weather
 WORKDIR /usr/src/musement-weather
+
+COPY . .
 
 RUN apt-get update && apt-get install -y \
         git \
@@ -9,13 +10,10 @@ RUN apt-get update && apt-get install -y \
         unzip
 
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
-    && php composer-setup.php \
+    && php composer-setup.php --version=1.10.17 \
     && mv composer.phar /usr/local/bin/composer \
     && chmod +x /usr/local/bin/composer
 
-RUN composer install
-RUN composer dumpautoload
-
-CMD ["php", "-a"]
+ENTRYPOINT ["sh", "./docker/php-cli/entrypoint.sh"]
 
 
