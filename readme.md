@@ -43,11 +43,6 @@ composer phpunit
 ```
 composer static_analyze
 ```
-## STEP 2 API DESIGN
-[Solution](docs/api_design.md)
 
 ## SOLUTION NOTES
 [Solution Notes](docs/solution_notes.md)
-
-##Author
-Mykhailo Lozynskyy <lozynskyy.m@gmail.com>
